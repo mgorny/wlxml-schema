@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'
+	xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
+
+	<xs:import namespace='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+		schemaLocation='dcmes-rdf.xsd'/>
+
+	<!-- main structure -->
+	<xs:element name='utwor'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='rdf:RDF'/>
+				<xs:choice>
+					<xs:element name='opowiadanie' type='book' />
+					<xs:element name='powiesc' type='book' />
+					<xs:element name='dramat_wierszowany_l' type='book' />
+					<xs:element name='dramat_wierszowany_lp' type='book' />
+					<xs:element name='dramat_wspolczesny' type='book' />
+					<xs:element name='liryka_l' type='book' />
+					<xs:element name='liryka_lp' type='book' />
+					<xs:element name='wywiad' type='book' />
+				</xs:choice>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- inline elements -->
+	<xs:element name='any-inline' abstract='true' type='inline'/>
+	<xs:element name='tytul_dziela' substitutionGroup='any-inline'/>
+	<xs:element name='wyroznienie' substitutionGroup='any-inline'/>
+	<xs:element name='slowo_obce' substitutionGroup='any-inline'/>
+	<xs:element name='mat' substitutionGroup='any-inline'/>
+	<xs:element name='wyp_osoba' substitutionGroup='any-inline'/>
+	<xs:element name='www' substitutionGroup='any-inline'/>
+
+	<xs:complexType name='inline' mixed='true'>
+		<xs:sequence>
+			<xs:element ref='any-inline' minOccurs='0' maxOccurs='unbounded'/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- metadata (at beginning or end) -->
+	<xs:element name='any-meta' abstract='true' type='inline'/>
+	<xs:element name='autor_utworu' substitutionGroup='any-meta'/>
+	<xs:element name='nazwa_utworu' substitutionGroup='any-meta'/>
+	<xs:element name='dzielo_nadrzedne' substitutionGroup='any-meta'/>
+	<xs:element name='podtytul' substitutionGroup='any-meta'/>
+
+	<!-- paragraphs -->
+	<xs:element name='akap' type='inline'/>
+	<xs:element name='akap_cd' substitutionGroup='akap'/>
+	<xs:element name='akap_dialog' substitutionGroup='akap'/>
+
+	<!-- main book contents -->
+	<xs:complexType name='book'>
+		<xs:sequence>
+			<xs:element ref='any-meta' minOccurs='0' maxOccurs='unbounded'/>
+			<xs:element ref='akap' minOccurs='0' maxOccurs='unbounded'/>
+			<xs:element ref='any-meta' minOccurs='0' maxOccurs='unbounded'/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

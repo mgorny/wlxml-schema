@@ -32,7 +32,7 @@
 
  <!-- Import the XML namespace schema for xml:lang -->
  <import namespace="http://www.w3.org/XML/1998/namespace" 
-         schemaLocation="http://www.w3.org/2001/xml.xsd"/>
+         schemaLocation="xml.xsd"/>
 
 
  <!-- Import the RDF namespace schema for rdf:resource -->

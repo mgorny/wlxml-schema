@@ -34,6 +34,13 @@
 	<xs:element name='wyp_osoba' substitutionGroup='any-inline'/>
 	<xs:element name='www' substitutionGroup='any-inline'/>
 
+	<!-- footnotes -->
+	<xs:element name='pa' substitutionGroup='any-inline'/>
+	<xs:element name='pt' substitutionGroup='any-inline'/>
+	<xs:element name='pr' substitutionGroup='any-inline'/>
+	<xs:element name='pe' substitutionGroup='any-inline'/>
+
+	<!-- motifs (<begin/><motyw/>...<end/>) -->
 	<xs:element name='motyw'>
 		<xs:complexType mixed='true'>
 			<xs:sequence>
@@ -45,6 +52,7 @@
 	<xs:element name='begin' substitutionGroup='motyw'/>
 	<xs:element name='end' substitutionGroup='motyw'/>
 
+	<!-- complete type for inline data -->
 	<xs:complexType name='inline' mixed='true'>
 		<xs:sequence>
 			<xs:sequence minOccurs='0' maxOccurs='unbounded'>

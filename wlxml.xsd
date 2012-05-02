@@ -34,8 +34,23 @@
 	<xs:element name='wyp_osoba' substitutionGroup='any-inline'/>
 	<xs:element name='www' substitutionGroup='any-inline'/>
 
+	<xs:element name='motyw'>
+		<xs:complexType mixed='true'>
+			<xs:sequence>
+				<xs:element ref='any-inline' minOccurs='0' maxOccurs='unbounded'/>
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:string' use='required'/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='begin' substitutionGroup='motyw'/>
+	<xs:element name='end' substitutionGroup='motyw'/>
+
 	<xs:complexType name='inline' mixed='true'>
 		<xs:sequence>
+			<xs:sequence minOccurs='0' maxOccurs='unbounded'>
+				<xs:element ref='any-inline' minOccurs='0' maxOccurs='unbounded'/>
+				<xs:element ref='motyw'/>
+			</xs:sequence>
 			<xs:element ref='any-inline' minOccurs='0' maxOccurs='unbounded'/>
 		</xs:sequence>
 	</xs:complexType>

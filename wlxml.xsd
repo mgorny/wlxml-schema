@@ -52,12 +52,40 @@
 	<xs:element name='akap_cd' substitutionGroup='akap'/>
 	<xs:element name='akap_dialog' substitutionGroup='akap'/>
 
+	<!-- notes -->
+	<xs:element name='nota'>
+		<xs:complexType>
+			<xs:choice>
+				<xs:element ref='akap' minOccurs='0' maxOccurs='unbounded'/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='nota_red' substitutionGroup='nota'/>
+	<xs:element name='dedykacja' substitutionGroup='nota'/>
+
+	<!-- motto -->
+	<xs:group name='motto'>
+		<xs:sequence>
+			<xs:element name='motto'>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref='akap' minOccurs='0' maxOccurs='unbounded'/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name='motto_podpis' maxOccurs='1' type='inline'/>
+		</xs:sequence>
+	</xs:group>
+
 	<!-- main book contents -->
 	<xs:complexType name='book'>
 		<xs:sequence>
 			<xs:element ref='any-meta' minOccurs='0' maxOccurs='unbounded'/>
+			<xs:element ref='nota' minOccurs='0' maxOccurs='unbounded'/>
+			<xs:group ref='motto' minOccurs='0' maxOccurs='unbounded'/>
 			<xs:element ref='akap' minOccurs='0' maxOccurs='unbounded'/>
-			<xs:element ref='any-meta' minOccurs='0' maxOccurs='unbounded'/>
+			<xs:group ref='motto' minOccurs='0' maxOccurs='unbounded'/>
+			<xs:element ref='nota' minOccurs='0' maxOccurs='unbounded'/>
 		</xs:sequence>
 	</xs:complexType>
 </xs:schema>

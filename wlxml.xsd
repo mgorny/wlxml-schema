@@ -77,13 +77,27 @@
 		</xs:sequence>
 	</xs:group>
 
+	<!-- headers & body -->
+	<xs:element name='header' abstract='true' type='inline'/>
+	<xs:element name='naglowek_czesc' substitutionGroup='header'/>
+	<xs:element name='naglowek_rozdzial' substitutionGroup='header'/>
+	<xs:element name='naglowek_podrozdzial' substitutionGroup='header'/>
+	<xs:element name='srodtytul' substitutionGroup='header'/>
+
+	<xs:group name='book-body'>
+		<xs:sequence>
+			<xs:element ref='header' minOccurs='0' maxOccurs='unbounded'/>
+			<xs:element ref='akap' minOccurs='1' maxOccurs='unbounded'/>
+		</xs:sequence>
+	</xs:group>
+
 	<!-- main book contents -->
 	<xs:complexType name='book'>
 		<xs:sequence>
 			<xs:element ref='any-meta' minOccurs='0' maxOccurs='unbounded'/>
 			<xs:element ref='nota' minOccurs='0' maxOccurs='unbounded'/>
 			<xs:group ref='motto' minOccurs='0' maxOccurs='unbounded'/>
-			<xs:element ref='akap' minOccurs='0' maxOccurs='unbounded'/>
+			<xs:group ref='book-body' maxOccurs='unbounded'/>
 			<xs:group ref='motto' minOccurs='0' maxOccurs='unbounded'/>
 			<xs:element ref='nota' minOccurs='0' maxOccurs='unbounded'/>
 		</xs:sequence>

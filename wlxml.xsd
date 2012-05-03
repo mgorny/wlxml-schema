@@ -14,9 +14,9 @@
 				<xs:choice>
 					<xs:element name='opowiadanie' type='book' />
 					<xs:element name='powiesc' type='book' />
-					<xs:element name='dramat_wierszowany_l' type='drama-l' />
-					<xs:element name='dramat_wierszowany_lp' type='drama-l' />
-					<xs:element name='dramat_wspolczesny' type='book' />
+					<xs:element name='dramat_wierszowany_l' type='drama' />
+					<xs:element name='dramat_wierszowany_lp' type='drama' />
+					<xs:element name='dramat_wspolczesny' type='drama' />
 					<xs:element name='liryka_l' type='poem' />
 					<xs:element name='liryka_lp' type='poem' />
 					<xs:element name='wywiad' type='book' />
@@ -111,6 +111,7 @@
 			<xs:sequence minOccurs='1' maxOccurs='unbounded'>
 				<xs:choice>
 					<xs:element ref='akap' minOccurs='0' maxOccurs='unbounded'/>
+					<xs:element ref='strofa' minOccurs='0' maxOccurs='unbounded'/>
 				</xs:choice>
 				<xs:element ref='uwaga' minOccurs='0' maxOccurs='unbounded'/>
 			</xs:sequence>
@@ -230,7 +231,7 @@
 
 	<xs:element name='didaskalia' type='inline'/>
 
-	<xs:group name='drama-l-body'>
+	<xs:group name='drama-body'>
 		<xs:sequence>
 			<xs:element ref='drama-header' minOccurs='0' maxOccurs='unbounded'/>
 			<xs:element ref='sep' minOccurs='0' maxOccurs='unbounded'/>
@@ -244,7 +245,10 @@
 						<xs:sequence>
 							<xs:element ref='didaskalia' minOccurs='0' maxOccurs='unbounded'/>
 							<xs:sequence minOccurs='1' maxOccurs='unbounded'>
-								<xs:element ref='strofa' minOccurs='1' maxOccurs='unbounded'/>
+								<xs:choice>
+									<xs:element ref='strofa' minOccurs='1' maxOccurs='unbounded'/>
+									<xs:element ref='akap' minOccurs='1' maxOccurs='unbounded'/>
+								</xs:choice>
 								<xs:element ref='didaskalia' minOccurs='0' maxOccurs='unbounded'/>
 							</xs:sequence>
 						</xs:sequence>
@@ -288,12 +292,12 @@
 		</xs:sequence>
 	</xs:complexType>
 
-	<xs:complexType name='drama-l'>
+	<xs:complexType name='drama'>
 		<xs:sequence>
 			<xs:group ref='headings' minOccurs='1' maxOccurs='unbounded'/>
 			<xs:element ref='lista_osob' minOccurs='0' maxOccurs='1'/>
 			<xs:element ref='miejsce_czas' minOccurs='0' maxOccurs='1'/>
-			<xs:group ref='drama-l-body' maxOccurs='unbounded'/>
+			<xs:group ref='drama-body' maxOccurs='unbounded'/>
 			<xs:group ref='footers' minOccurs='1' maxOccurs='unbounded'/>
 		</xs:sequence>
 	</xs:complexType>

@@ -54,12 +54,9 @@
 
 	<!-- complete type for inline data -->
 	<xs:complexType name='inline' mixed='true'>
-		<xs:sequence>
-			<xs:sequence minOccurs='0' maxOccurs='unbounded'>
-				<xs:element ref='any-inline' minOccurs='0' maxOccurs='unbounded'/>
-				<xs:element ref='motyw'/>
-			</xs:sequence>
+		<xs:sequence minOccurs='1' maxOccurs='unbounded'>
 			<xs:element ref='any-inline' minOccurs='0' maxOccurs='unbounded'/>
+			<xs:element ref='motyw' minOccurs='0' maxOccurs='unbounded'/>
 		</xs:sequence>
 	</xs:complexType>
 

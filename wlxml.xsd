@@ -14,8 +14,8 @@
 				<xs:choice>
 					<xs:element name='opowiadanie' type='book' />
 					<xs:element name='powiesc' type='book' />
-					<xs:element name='dramat_wierszowany_l' type='book' />
-					<xs:element name='dramat_wierszowany_lp' type='book' />
+					<xs:element name='dramat_wierszowany_l' type='drama-l' />
+					<xs:element name='dramat_wierszowany_lp' type='drama-l' />
 					<xs:element name='dramat_wspolczesny' type='book' />
 					<xs:element name='liryka_l' type='poem' />
 					<xs:element name='liryka_lp' type='poem' />
@@ -202,6 +202,59 @@
 		</xs:sequence>
 	</xs:group>
 
+	<!-- drama -->
+	<xs:element name='lista_osob'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name='naglowek_listy' type='inline'
+					minOccurs='0' maxOccurs='1'/>
+				<xs:element name='lista_osoba'
+					minOccurs='1' maxOccurs='unbounded'>
+					<xs:complexType mixed='true'>
+						<xs:sequence minOccurs='1' maxOccurs='unbounded'>
+							<xs:element ref='any-inline' minOccurs='0' maxOccurs='unbounded'/>
+							<xs:element ref='uwaga' minOccurs='0' maxOccurs='unbounded'/>
+						</xs:sequence>
+
+						<xs:attribute name='typ' type='xs:string' use='optional'/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='miejsce_czas' type='inline'/>
+
+	<xs:element name='drama-header' abstract='true' type='inline'/>
+	<xs:element name='naglowek_akt' substitutionGroup='drama-header'/>
+	<xs:element name='naglowek_scena' substitutionGroup='drama-header'/>
+
+	<xs:element name='didaskalia' type='inline'/>
+
+	<xs:group name='drama-l-body'>
+		<xs:sequence>
+			<xs:element ref='drama-header' minOccurs='0' maxOccurs='unbounded'/>
+			<xs:element ref='sep' minOccurs='0' maxOccurs='unbounded'/>
+			<xs:element ref='uwaga' minOccurs='0' maxOccurs='unbounded'/>
+			<xs:element ref='didaskalia' minOccurs='0' maxOccurs='unbounded'/>
+			<xs:element name='naglowek_osoba' type='inline'/>
+			<xs:element ref='didaskalia' minOccurs='0' maxOccurs='unbounded'/>
+			<xs:sequence minOccurs='1' maxOccurs='unbounded'>
+				<xs:element name='kwestia'>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref='didaskalia' minOccurs='0' maxOccurs='unbounded'/>
+							<xs:sequence minOccurs='1' maxOccurs='unbounded'>
+								<xs:element ref='strofa' minOccurs='1' maxOccurs='unbounded'/>
+								<xs:element ref='didaskalia' minOccurs='0' maxOccurs='unbounded'/>
+							</xs:sequence>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element ref='didaskalia' minOccurs='0' maxOccurs='unbounded'/>
+			</xs:sequence>
+		</xs:sequence>
+	</xs:group>
+
 	<!-- main book contents -->
 	<xs:group name='headings'>
 		<xs:sequence>
@@ -231,6 +284,16 @@
 		<xs:sequence>
 			<xs:group ref='headings' minOccurs='1' maxOccurs='unbounded'/>
 			<xs:group ref='poem-body' maxOccurs='unbounded'/>
+			<xs:group ref='footers' minOccurs='1' maxOccurs='unbounded'/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name='drama-l'>
+		<xs:sequence>
+			<xs:group ref='headings' minOccurs='1' maxOccurs='unbounded'/>
+			<xs:element ref='lista_osob' minOccurs='0' maxOccurs='1'/>
+			<xs:element ref='miejsce_czas' minOccurs='0' maxOccurs='1'/>
+			<xs:group ref='drama-l-body' maxOccurs='unbounded'/>
 			<xs:group ref='footers' minOccurs='1' maxOccurs='unbounded'/>
 		</xs:sequence>
 	</xs:complexType>

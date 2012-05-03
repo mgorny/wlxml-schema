@@ -93,6 +93,7 @@
 				<xs:element ref='any-inline' minOccurs='0' maxOccurs='unbounded'/>
 				<xs:element ref='verse' minOccurs='0' maxOccurs='unbounded'/>
 				<xs:element ref='motyw' minOccurs='0' maxOccurs='unbounded'/>
+				<xs:element ref='zastepnik_wersu' minOccurs='0' maxOccurs='unbounded'/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -138,6 +139,19 @@
 		</xs:sequence>
 	</xs:group>
 
+	<!-- separators -->
+	<xs:element name='sep' abstract='true'>
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name='sekcja_swiatlo' substitutionGroup='sep'/>
+	<xs:element name='sekcja_asterysk' substitutionGroup='sep'/>
+	<xs:element name='separator_linia' substitutionGroup='sep'/>
+
+	<xs:element name='zastepnik_wersu'>
+		<!-- this one's only for poems -->
+		<xs:complexType/>
+	</xs:element>
+
 	<!-- headers & body -->
 	<xs:element name='header' abstract='true' type='inline'/>
 	<xs:element name='naglowek_czesc' substitutionGroup='header'/>
@@ -151,6 +165,7 @@
 			<xs:element ref='akap' minOccurs='1' maxOccurs='unbounded'/>
 			<xs:element ref='dlugi_cytat' minOccurs='0' maxOccurs='unbounded'/>
 			<xs:element ref='poezja_cyt' minOccurs='0' maxOccurs='unbounded'/>
+			<xs:element ref='sep' minOccurs='0' maxOccurs='unbounded'/>
 		</xs:sequence>
 	</xs:group>
 
@@ -160,6 +175,7 @@
 			<xs:element ref='strofa' minOccurs='1' maxOccurs='unbounded'/>
 			<xs:element ref='dlugi_cytat' minOccurs='0' maxOccurs='unbounded'/>
 			<xs:element ref='poezja_cyt' minOccurs='0' maxOccurs='unbounded'/>
+			<xs:element ref='sep' minOccurs='0' maxOccurs='unbounded'/>
 		</xs:sequence>
 	</xs:group>
 

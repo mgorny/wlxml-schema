@@ -17,8 +17,8 @@
 					<xs:element name='dramat_wierszowany_l' type='book' />
 					<xs:element name='dramat_wierszowany_lp' type='book' />
 					<xs:element name='dramat_wspolczesny' type='book' />
-					<xs:element name='liryka_l' type='book' />
-					<xs:element name='liryka_lp' type='book' />
+					<xs:element name='liryka_l' type='poem' />
+					<xs:element name='liryka_lp' type='poem' />
 					<xs:element name='wywiad' type='book' />
 				</xs:choice>
 			</xs:sequence>
@@ -75,6 +75,22 @@
 	<xs:element name='akap_cd' substitutionGroup='akap'/>
 	<xs:element name='akap_dialog' substitutionGroup='akap'/>
 
+	<!-- poems -->
+	<xs:element name='verse' type='inline' abstract='true'/>
+	<xs:element name='wers_akap' substitutionGroup='verse'/>
+	<xs:element name='wers_wciety' substitutionGroup='verse'/>
+	<xs:element name='wers_cd' substitutionGroup='verse'/>
+
+	<xs:element name='strofa'>
+		<xs:complexType mixed='true'>
+			<xs:sequence minOccurs='1' maxOccurs='unbounded'>
+				<xs:element ref='any-inline' minOccurs='0' maxOccurs='unbounded'/>
+				<xs:element ref='verse' minOccurs='0' maxOccurs='unbounded'/>
+				<xs:element ref='motyw' minOccurs='0' maxOccurs='unbounded'/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
 	<!-- notes -->
 	<xs:element name='nota'>
 		<xs:complexType>
@@ -114,15 +130,41 @@
 		</xs:sequence>
 	</xs:group>
 
+	<xs:group name='poem-body'>
+		<xs:sequence>
+			<xs:element ref='header' minOccurs='0' maxOccurs='unbounded'/>
+			<xs:element ref='strofa' minOccurs='1' maxOccurs='unbounded'/>
+		</xs:sequence>
+	</xs:group>
+
 	<!-- main book contents -->
-	<xs:complexType name='book'>
+	<xs:group name='headings'>
 		<xs:sequence>
 			<xs:element ref='any-meta' minOccurs='0' maxOccurs='unbounded'/>
 			<xs:element ref='nota' minOccurs='0' maxOccurs='unbounded'/>
 			<xs:group ref='motto' minOccurs='0' maxOccurs='unbounded'/>
-			<xs:group ref='book-body' maxOccurs='unbounded'/>
+		</xs:sequence>
+	</xs:group>
+	<xs:group name='footers'>
+		<xs:sequence>
 			<xs:group ref='motto' minOccurs='0' maxOccurs='unbounded'/>
 			<xs:element ref='nota' minOccurs='0' maxOccurs='unbounded'/>
+		</xs:sequence>
+	</xs:group>
+
+	<xs:complexType name='book'>
+		<xs:sequence>
+			<xs:group ref='headings'/>
+			<xs:group ref='book-body' maxOccurs='unbounded'/>
+			<xs:group ref='footers'/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name='poem'>
+		<xs:sequence>
+			<xs:group ref='headings'/>
+			<xs:group ref='poem-body' maxOccurs='unbounded'/>
+			<xs:group ref='footers'/>
 		</xs:sequence>
 	</xs:complexType>
 </xs:schema>

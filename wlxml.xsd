@@ -25,6 +25,9 @@
 		</xs:complexType>
 	</xs:element>
 
+	<!-- those can happen anywhere -->
+	<xs:element name='uwaga' type='xs:string'/>
+
 	<!-- inline elements -->
 	<xs:element name='any-inline' abstract='true' type='inline'/>
 	<xs:element name='tytul_dziela' substitutionGroup='any-inline'/>
@@ -43,8 +46,9 @@
 	<!-- motifs (<begin/><motyw/>...<end/>) -->
 	<xs:element name='motyw'>
 		<xs:complexType mixed='true'>
-			<xs:sequence>
+			<xs:sequence minOccurs='1' maxOccurs='unbounded'>
 				<xs:element ref='any-inline' minOccurs='0' maxOccurs='unbounded'/>
+				<xs:element ref='uwaga' minOccurs='0' maxOccurs='unbounded'/>
 			</xs:sequence>
 			<xs:attribute name='id' type='xs:string' use='required'/>
 		</xs:complexType>
@@ -57,6 +61,7 @@
 		<xs:sequence minOccurs='1' maxOccurs='unbounded'>
 			<xs:element ref='any-inline' minOccurs='0' maxOccurs='unbounded'/>
 			<xs:element ref='motyw' minOccurs='0' maxOccurs='unbounded'/>
+			<xs:element ref='uwaga' minOccurs='0' maxOccurs='unbounded'/>
 		</xs:sequence>
 	</xs:complexType>
 
@@ -78,6 +83,7 @@
 			<xs:sequence minOccurs='1' maxOccurs='unbounded'>
 				<xs:element ref='any-inline' minOccurs='0' maxOccurs='unbounded'/>
 				<xs:element ref='motyw' minOccurs='0' maxOccurs='unbounded'/>
+				<xs:element ref='uwaga' minOccurs='0' maxOccurs='unbounded'/>
 			</xs:sequence>
 
 			<xs:attribute name='typ' type='xs:integer' use='optional'/>
@@ -94,6 +100,7 @@
 				<xs:element ref='verse' minOccurs='0' maxOccurs='unbounded'/>
 				<xs:element ref='motyw' minOccurs='0' maxOccurs='unbounded'/>
 				<xs:element ref='zastepnik_wersu' minOccurs='0' maxOccurs='unbounded'/>
+				<xs:element ref='uwaga' minOccurs='0' maxOccurs='unbounded'/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -101,9 +108,12 @@
 	<!-- notes -->
 	<xs:element name='nota'>
 		<xs:complexType>
-			<xs:choice>
-				<xs:element ref='akap' minOccurs='0' maxOccurs='unbounded'/>
-			</xs:choice>
+			<xs:sequence minOccurs='1' maxOccurs='unbounded'>
+				<xs:choice>
+					<xs:element ref='akap' minOccurs='0' maxOccurs='unbounded'/>
+				</xs:choice>
+				<xs:element ref='uwaga' minOccurs='0' maxOccurs='unbounded'/>
+			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name='nota_red' substitutionGroup='nota'/>
@@ -112,16 +122,18 @@
 	<!-- quotations -->
 	<xs:element name='dlugi_cytat'>
 		<xs:complexType>
-			<xs:choice>
+			<xs:sequence minOccurs='1' maxOccurs='unbounded'>
 				<xs:element ref='akap' minOccurs='0' maxOccurs='unbounded'/>
-			</xs:choice>
+				<xs:element ref='uwaga' minOccurs='0' maxOccurs='unbounded'/>
+			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name='poezja_cyt'>
 		<xs:complexType>
-			<xs:choice>
+			<xs:sequence minOccurs='1' maxOccurs='unbounded'>
 				<xs:element ref='strofa' minOccurs='0' maxOccurs='unbounded'/>
-			</xs:choice>
+				<xs:element ref='uwaga' minOccurs='0' maxOccurs='unbounded'/>
+			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
 
@@ -130,8 +142,9 @@
 		<xs:sequence>
 			<xs:element name='motto'>
 				<xs:complexType>
-					<xs:sequence>
+					<xs:sequence minOccurs='1' maxOccurs='unbounded'>
 						<xs:element ref='akap' minOccurs='0' maxOccurs='unbounded'/>
+						<xs:element ref='uwaga' minOccurs='0' maxOccurs='unbounded'/>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
@@ -141,7 +154,11 @@
 
 	<!-- separators -->
 	<xs:element name='sep' abstract='true'>
-		<xs:complexType/>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='uwaga' minOccurs='0' maxOccurs='unbounded'/>
+			</xs:sequence>
+		</xs:complexType>
 	</xs:element>
 	<xs:element name='sekcja_swiatlo' substitutionGroup='sep'/>
 	<xs:element name='sekcja_asterysk' substitutionGroup='sep'/>
@@ -149,7 +166,11 @@
 
 	<xs:element name='zastepnik_wersu'>
 		<!-- this one's only for poems -->
-		<xs:complexType/>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='uwaga' minOccurs='0' maxOccurs='unbounded'/>
+			</xs:sequence>
+		</xs:complexType>
 	</xs:element>
 
 	<!-- headers & body -->
@@ -166,6 +187,7 @@
 			<xs:element ref='dlugi_cytat' minOccurs='0' maxOccurs='unbounded'/>
 			<xs:element ref='poezja_cyt' minOccurs='0' maxOccurs='unbounded'/>
 			<xs:element ref='sep' minOccurs='0' maxOccurs='unbounded'/>
+			<xs:element ref='uwaga' minOccurs='0' maxOccurs='unbounded'/>
 		</xs:sequence>
 	</xs:group>
 
@@ -176,6 +198,7 @@
 			<xs:element ref='dlugi_cytat' minOccurs='0' maxOccurs='unbounded'/>
 			<xs:element ref='poezja_cyt' minOccurs='0' maxOccurs='unbounded'/>
 			<xs:element ref='sep' minOccurs='0' maxOccurs='unbounded'/>
+			<xs:element ref='uwaga' minOccurs='0' maxOccurs='unbounded'/>
 		</xs:sequence>
 	</xs:group>
 
@@ -185,28 +208,30 @@
 			<xs:element ref='any-meta' minOccurs='0' maxOccurs='unbounded'/>
 			<xs:element ref='nota' minOccurs='0' maxOccurs='unbounded'/>
 			<xs:group ref='motto' minOccurs='0' maxOccurs='unbounded'/>
+			<xs:element ref='uwaga' minOccurs='0' maxOccurs='unbounded'/>
 		</xs:sequence>
 	</xs:group>
 	<xs:group name='footers'>
 		<xs:sequence>
 			<xs:group ref='motto' minOccurs='0' maxOccurs='unbounded'/>
 			<xs:element ref='nota' minOccurs='0' maxOccurs='unbounded'/>
+			<xs:element ref='uwaga' minOccurs='0' maxOccurs='unbounded'/>
 		</xs:sequence>
 	</xs:group>
 
 	<xs:complexType name='book'>
 		<xs:sequence>
-			<xs:group ref='headings'/>
+			<xs:group ref='headings' minOccurs='1' maxOccurs='unbounded'/>
 			<xs:group ref='book-body' maxOccurs='unbounded'/>
-			<xs:group ref='footers'/>
+			<xs:group ref='footers' minOccurs='1' maxOccurs='unbounded'/>
 		</xs:sequence>
 	</xs:complexType>
 
 	<xs:complexType name='poem'>
 		<xs:sequence>
-			<xs:group ref='headings'/>
+			<xs:group ref='headings' minOccurs='1' maxOccurs='unbounded'/>
 			<xs:group ref='poem-body' maxOccurs='unbounded'/>
-			<xs:group ref='footers'/>
+			<xs:group ref='footers' minOccurs='1' maxOccurs='unbounded'/>
 		</xs:sequence>
 	</xs:complexType>
 </xs:schema>

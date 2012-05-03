@@ -229,7 +229,17 @@
 	<xs:element name='naglowek_akt' substitutionGroup='drama-header'/>
 	<xs:element name='naglowek_scena' substitutionGroup='drama-header'/>
 
-	<xs:element name='didaskalia' type='inline'/>
+	<xs:element name='osoba' type='inline'/>
+	<xs:element name='didaskalia'>
+		<xs:complexType mixed='true'>
+			<xs:sequence minOccurs='1' maxOccurs='unbounded'>
+				<xs:element ref='any-inline' minOccurs='0' maxOccurs='unbounded'/>
+				<xs:element ref='motyw' minOccurs='0' maxOccurs='unbounded'/>
+				<xs:element ref='uwaga' minOccurs='0' maxOccurs='unbounded'/>
+				<xs:element ref='osoba' minOccurs='0' maxOccurs='unbounded'/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
 
 	<xs:group name='drama-body'>
 		<xs:sequence>

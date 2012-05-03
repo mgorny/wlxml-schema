@@ -99,6 +99,22 @@
 	<xs:element name='nota_red' substitutionGroup='nota'/>
 	<xs:element name='dedykacja' substitutionGroup='nota'/>
 
+	<!-- quotations -->
+	<xs:element name='dlugi_cytat'>
+		<xs:complexType>
+			<xs:choice>
+				<xs:element ref='akap' minOccurs='0' maxOccurs='unbounded'/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='poezja_cyt'>
+		<xs:complexType>
+			<xs:choice>
+				<xs:element ref='strofa' minOccurs='0' maxOccurs='unbounded'/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+
 	<!-- motto -->
 	<xs:group name='motto'>
 		<xs:sequence>
@@ -124,6 +140,8 @@
 		<xs:sequence>
 			<xs:element ref='header' minOccurs='0' maxOccurs='unbounded'/>
 			<xs:element ref='akap' minOccurs='1' maxOccurs='unbounded'/>
+			<xs:element ref='dlugi_cytat' minOccurs='0' maxOccurs='unbounded'/>
+			<xs:element ref='poezja_cyt' minOccurs='0' maxOccurs='unbounded'/>
 		</xs:sequence>
 	</xs:group>
 
@@ -131,6 +149,8 @@
 		<xs:sequence>
 			<xs:element ref='header' minOccurs='0' maxOccurs='unbounded'/>
 			<xs:element ref='strofa' minOccurs='1' maxOccurs='unbounded'/>
+			<xs:element ref='dlugi_cytat' minOccurs='0' maxOccurs='unbounded'/>
+			<xs:element ref='poezja_cyt' minOccurs='0' maxOccurs='unbounded'/>
 		</xs:sequence>
 	</xs:group>
 

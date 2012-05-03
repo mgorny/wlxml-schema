@@ -73,7 +73,16 @@
 	<xs:element name='akap_dialog' substitutionGroup='akap'/>
 
 	<!-- poems -->
-	<xs:element name='verse' type='inline' abstract='true'/>
+	<xs:element name='verse' abstract='true'>
+		<xs:complexType mixed='true'>
+			<xs:sequence minOccurs='1' maxOccurs='unbounded'>
+				<xs:element ref='any-inline' minOccurs='0' maxOccurs='unbounded'/>
+				<xs:element ref='motyw' minOccurs='0' maxOccurs='unbounded'/>
+			</xs:sequence>
+
+			<xs:attribute name='typ' type='xs:integer' use='optional'/>
+		</xs:complexType>
+	</xs:element>
 	<xs:element name='wers_akap' substitutionGroup='verse'/>
 	<xs:element name='wers_wciety' substitutionGroup='verse'/>
 	<xs:element name='wers_cd' substitutionGroup='verse'/>

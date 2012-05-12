@@ -37,6 +37,9 @@
 	<xs:element name='wyp_osoba' substitutionGroup='any-inline'/>
 	<xs:element name='www' substitutionGroup='any-inline'/>
 
+	<!-- drama-specific -->
+	<xs:element name='didask_tekst' substitutionGroup='any-inline'/>
+
 	<!-- footnotes -->
 	<xs:element name='pa' substitutionGroup='any-inline'/>
 	<xs:element name='pt' substitutionGroup='any-inline'/>
